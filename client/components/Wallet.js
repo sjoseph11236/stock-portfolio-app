@@ -23,7 +23,7 @@ const Wallet = () => {
             </div>
             <div class="field is-grouped">
               <div class="control">
-                <button class="button is-link">Submit</button>
+                <button class="button is-link">Buy</button>
               </div>
             </div>
           </div>
