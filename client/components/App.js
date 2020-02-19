@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-
+import Nav from './Nav';
 class App extends Component { 
   render() {
     return(
-      <section class="section">
-        <div class="container">
-          <h1 class="title">
-            Boiler Plate
-          </h1>
-          <p class="subtitle">
-            My first website with <strong>Bulma</strong>!
-          </p>
-        </div>
-    </section>
+      <div>
+        <section class="hero is-primary is-bold">
+          <div class="hero-body">
+              <h1 class="title">
+                Stock Portfolio
+              </h1>
+              <h2 class="subtitle">
+                Welcome user here
+              </h2>
+          </div>
+        </section>
+        <section class="section">
+          <Nav />
+        </section>
+      </div>    
     )
   }
 }
