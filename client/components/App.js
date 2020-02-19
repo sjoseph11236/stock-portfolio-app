@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Nav from './Nav';
 import Home from './Home';
-import SignUp from './auth/SignUp';
-import { Route, Switch, Link } from 'react-router-dom';
+import Register from './auth/Register';
+import { Route, Switch } from 'react-router-dom';
+import SignIn from './auth/SignIn';
 
 class App extends Component { 
   render() {
@@ -18,11 +18,11 @@ class App extends Component {
               </h2>
           </div>
         </section>
+        <SignIn />
         <section className="section">
-          <Nav />
           <Switch> 
-            <Route exact path='/' render={() => <Home />} />
-            <Route exact path='/signup' render={() => <SignUp />}/>
+            <Route exact path='/home' render={() => <Home />} />
+            <Route exact path='/register' render={() => <Register />}/>
           </Switch>
         </section>
       </div>    
