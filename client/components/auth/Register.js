@@ -17,14 +17,14 @@ const Register = () => {
             <div class="field">
               <label class="label">Email</label>
               <div class="control">
-                <input class="input is-success" type="text" placeholder="Email" value=""/>
+                <input class="input is-success" type="email" placeholder="Email" value=""/>
               </div>
             </div>
 
             <div class="field">
               <label class="label">Password</label>
               <div class="control">
-                <input class="input is-success" type="text" placeholder="Password" value=""/>
+                <input class="input is-success" type="password" placeholder="Password" value=""/>
               </div>
             </div>
             
