@@ -1,4 +1,5 @@
-# STOCK PORTFOLIO AP:
+# STOCK PORTFOLIO APP:
 
 
 ### SOURCES:
+https://iexcloud.io/docs/api/
