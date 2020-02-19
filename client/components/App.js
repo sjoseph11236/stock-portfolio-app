@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
-import Portfolio from './Portfolio';
-import Wallet from './Wallet';
+import Home from './Home';
+import SignUp from './auth/SignUp';
+import { Route, Switch, Link } from 'react-router-dom';
 
 class App extends Component { 
   render() {
@@ -19,10 +20,10 @@ class App extends Component {
         </section>
         <section className="section">
           <Nav />
-          <div className="tile is-ancestor">
-            <Portfolio />
-            <Wallet />
-          </div>
+          <Switch> 
+            <Route exact path='/' render={() => <Home />} />
+            <Route exact path='/signup' render={() => <SignUp />}/>
+          </Switch>
         </section>
       </div>    
     )
