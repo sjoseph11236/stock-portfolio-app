@@ -5,11 +5,14 @@ import Nav from './Nav';
 
 const Home = () => {
   return ( 
-    <div className="tile is-ancestor">
+    <div>
       <Nav />
-      <Portfolio />
-      <Wallet />
+      <div className="tile is-ancestor">  
+        <Portfolio />
+        <Wallet />
+      </div>
     </div>
+
   );
 }
 

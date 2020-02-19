@@ -18,7 +18,7 @@ class App extends Component {
               </h2>
           </div>
         </section>
-        <SignIn />
+       <Route exact path='/' render={()=> <SignIn />} />
         <section className="section">
           <Switch> 
             <Route exact path='/home' render={() => <Home />} />
