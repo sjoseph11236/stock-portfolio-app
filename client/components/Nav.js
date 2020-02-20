@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logout } from '../store';
 
-const Nav = () => {
+const Nav = ({ handleClick , isLoggedIn }) => {
   return ( 
     <nav className="level">
       <div className="level-left">
@@ -17,9 +19,24 @@ const Nav = () => {
             <u>Transcations</u> 
           </Link>
         </p>
+        <p class="level-item" onClick={handleClick}><a class="button is-success">Log Out</a></p>
       </div>
     </nav>
   );
 }
 
-export default Nav;
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: !!state.user.id
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleClick() {
+      dispatch(logout())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)
