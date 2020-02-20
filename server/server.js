@@ -3,7 +3,6 @@ const morgan = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
-// Create an express instance
 const app = express();
 const { db } = require('./db/');
 const User = require('./db/models/user');

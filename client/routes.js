@@ -15,11 +15,12 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props
+    console.log("TCL: Routes -> render -> isLoggedIn ", isLoggedIn )
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={Register} />
+        <Route exact path="/register" component={Register} />
         <Route exact path="/signin" component={SignIn} />
         {isLoggedIn && (
           <Switch>

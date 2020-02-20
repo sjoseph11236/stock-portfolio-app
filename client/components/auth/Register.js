@@ -79,7 +79,7 @@ class Register extends Component {
       </div> 
     );
   }
-}
+};
 
 const mapStateToProps = state => {
   return {
