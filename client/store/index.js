@@ -5,7 +5,7 @@ import { createLogger } from 'redux-logger';
 import  reduce  from './reducers/user'
 import user from './reducers/user';
 
-const reducer = combineReducers({reduce})
+const reducer = combineReducers({user})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

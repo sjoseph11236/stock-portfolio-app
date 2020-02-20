@@ -7,9 +7,7 @@ import Register from './components/auth/Register';
 import SignIn from './components/auth/SignIn';
 import Home from './components/Home';
 import Transactions from './components/Transactions';
-/**
- * COMPONENT
- */
+
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
@@ -21,13 +19,13 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/" component={Register} />
-        <Route path="/signin" component={SignIn} />
+        <Route exact path="/" component={Register} />
+        <Route exact path="/signin" component={SignIn} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/" component={Home} />
-            <Route path="/" component={Transactions} />
+            <Route exact path="/transactions" component={Transactions} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

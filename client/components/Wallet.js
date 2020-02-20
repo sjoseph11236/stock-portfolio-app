@@ -8,22 +8,22 @@ const Wallet = () => {
           <h1 className="title">Cash - $500.00</h1>
           <p className="subtitle">Start buying Shares</p>
           <div className="content">
-            <div class="field">
-              <label class="label">Ticker</label>
-              <div class="control">
-                <input class="input" type="text" placeholder="Ticker"/>
+            <div className="field">
+              <label className="label">Ticker</label>
+              <div className="control">
+                <input className="input" type="text" placeholder="Ticker"/>
               </div>
             </div>
 
-            <div class="field">
-              <label class="label">Amount</label>
-              <div class="control">
-                <input class="input is-success" type="text" placeholder="Qty" value=""/>
+            <div className="field">
+              <label className="label">Amount</label>
+              <div className="control">
+                <input className="input is-success" type="text" placeholder="Qty" value=""/>
               </div>
             </div>
-            <div class="field is-grouped">
-              <div class="control">
-                <button class="button is-link">Buy</button>
+            <div className="field is-grouped">
+              <div className="control">
+                <button className="button is-link">Buy</button>
               </div>
             </div>
           </div>
