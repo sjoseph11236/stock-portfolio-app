@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Route, Switch } from 'react-router-dom';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { me } from './store'
 import Register from './components/auth/Register';
@@ -25,12 +25,14 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={ Home } />
             <Route exact path="/transactions" component={Transactions} />
+            <Redirect to="/" />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
         <Route component={SignIn} />
+        <Redirect to="/signin" />
       </Switch>
     )
   }

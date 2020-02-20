@@ -5,12 +5,12 @@ import Wallet from './Wallet';
 
 const Home = () => {
   return ( 
-    <div>
+    <section className='section'>
       <div className="tile is-ancestor">  
         <Portfolio />
         <Wallet />
       </div>
-    </div>
+    </section>
   );
 }
 
