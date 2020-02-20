@@ -3,6 +3,7 @@ import Home from './Home';
 import Register from './auth/Register';
 import { Route, Switch } from 'react-router-dom';
 import SignIn from './auth/SignIn';
+import Transactions from './Transactions';
 
 class App extends Component { 
   render() {
@@ -18,11 +19,12 @@ class App extends Component {
               </h2>
           </div>
         </section>
-       <Route exact path='/' render={()=> <SignIn />} />
+        <Route exact path='/' render={()=> <SignIn />} />
         <section className="section">
           <Switch> 
             <Route exact path='/home' render={() => <Home />} />
             <Route exact path='/register' render={() => <Register />}/>
+            <Route exact path='/transactions' render={() => <Transactions />} />
           </Switch>
         </section>
       </div>    

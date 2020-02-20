@@ -1,12 +1,12 @@
 import React from 'react';
 import Info from './Info';
-
-const Portfolio = () => {
-  return ( 
+const Transactions = () => {
+  return (  
     <div className="tile is-parent">
       <article className="tile is-child notification">
         <div className="content">
-          <h1 className="title">Portfolio - $5943.34</h1>
+          <h1 className="title">Transactions
+        </h1>
           <div className="content">
           <div className="table-container">
             <table className="table">
@@ -29,4 +29,4 @@ const Portfolio = () => {
   );
 }
 
-export default Portfolio;
+export default Transactions;

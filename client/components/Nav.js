@@ -13,7 +13,7 @@ const Nav = () => {
           </Link>
         </p>
         <p className="level-item">
-          <Link to='/transcations'>
+          <Link to='/transactions'>
             <u>Transcations</u> 
           </Link>
         </p>
