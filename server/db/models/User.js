@@ -44,11 +44,6 @@ const User = db.define('user', {
     type: Sequelize.INTEGER,
     defaultValue: 500000
   }
-},{
-  hooks: {
-    beforeCreate: setSaltAndPassword,
-    beforeUpdate: setSaltAndPassword
-  }
 });
 
 /**
@@ -83,5 +78,10 @@ const setSaltAndPassword = user => {
   }
 };
 
+User.beforeCreate(setSaltAndPassword);
+User.beforeUpdate(setSaltAndPassword);
+User.beforeBulkCreate(users => {
+  users.forEach(setSaltAndPassword);
+})
 
 module.exports = User; 
