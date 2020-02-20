@@ -1,8 +1,24 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const session = require('express-session');
+const passport = require('passport');
 // Create an express instance
 const app = express();
+
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findByPk(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
 
 // Logging middleware
 app.use(morgan('dev'));
@@ -10,6 +26,13 @@ app.use(morgan('dev'));
 // Parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+
+app.use(session({
+  secret: 'a wildly insecure secret',
+  resave: false,
+  saveUninitialized: false
+}));
 
 // Static middleware
 app.use(express.static(path.join(__dirname, '../public')));
