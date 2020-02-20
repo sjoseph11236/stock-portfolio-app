@@ -34,7 +34,7 @@ const Register = () => {
                 <button class="button is-link">Send</button>
                 <div>
                 <br/>
-                <Link to='/signin'>
+                <Link to='/'>
                   <h2 className='has-text-centered'><u>Sign In here</u></h2>
                 </Link>
               </div>

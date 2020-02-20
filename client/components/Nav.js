@@ -8,7 +8,7 @@ const Nav = () => {
       </div>
       <div className="level-right">
         <p className="level-item">
-          <Link to='/home'>
+          <Link to='/'>
             <u>Portfolio</u>
           </Link>
         </p>

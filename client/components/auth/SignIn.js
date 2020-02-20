@@ -27,7 +27,7 @@ const SignIn = () => {
               <button class="button is-link">Send</button>
               <div>
                 <br/>
-                <Link to='/'>
+                <Link to='/register'>
                   <h2 className='has-text-centered'><u>Register here</u></h2>
                 </Link>
               </div>
