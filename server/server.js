@@ -49,7 +49,7 @@ app.use(passport.session());
 
 
 
-app.use('/api', require('./routes'));
+app.use('/auth', require('./auth'));
 
 
 // Static middleware
