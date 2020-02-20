@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import Home from './Home';
 import Register from './auth/Register';
-import { Route, Switch  } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import SignIn from './auth/SignIn';
 import Transactions from './Transactions';
 import Nav from './Nav';
-
-
 
 class App extends Component { 
   constructor(){
     super()
     this.state = { 
-      isSignedIn :false
+      isSignedIn : false
     }
   }
 
@@ -30,7 +28,6 @@ class App extends Component {
                 </h2>
             </div>
           </section>
-
           <section className="section">
             <Nav /> 
             <Switch>
@@ -58,7 +55,6 @@ class App extends Component {
         </div>    
       )
     }
-    
   }
 }
 
