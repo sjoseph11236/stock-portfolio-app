@@ -12,7 +12,12 @@ const dbStore = new SequelizeStore({ db });
 dbStore.sync();
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  try {
+    done(null, user.id);
+  } catch (error) {
+    done(error);
+  }
+
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -39,14 +44,19 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// Static middleware
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 // app.use('/api', require('./routes'));
 
 app.get('/api', (req, res) => { 
   res.send('hello World');
 });
+
+// Static middleware
+app.use(express.static(path.join(__dirname, '../public')));
 
 // 404 
 app.use(function(req, res, next) {

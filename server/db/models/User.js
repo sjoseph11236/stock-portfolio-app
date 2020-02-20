@@ -44,6 +44,11 @@ const User = db.define('user', {
     type: Sequelize.INTEGER,
     defaultValue: 500000
   }
+},{
+  hooks: {
+    beforeCreate: setSaltAndPassword,
+    beforeUpdate: setSaltAndPassword
+  }
 });
 
 /**
@@ -51,7 +56,7 @@ const User = db.define('user', {
  */
 User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password();
-}
+};
 
 /**
  * classMethods
@@ -76,12 +81,7 @@ const setSaltAndPassword = user => {
     user.salt = User.generateSalt();
     user.password = User.encryptPassword(user.password(), user.salt());
   }
-}
+};
 
-User.beforeCreate(setSaltAndPassword);
-User.beforeUpdate(setSaltAndPassword);
-User.beforeBulkCreate(users => {
-  users.forEach(setSaltAndPassword);
-});
 
 module.exports = User; 
