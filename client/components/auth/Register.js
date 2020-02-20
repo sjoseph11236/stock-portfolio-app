@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Register = () => {
+const Register = ({ name, handleSubmit, error }) => {
   return ( 
     <div className="container">   
       <section className="section">
         <div className="box">
           <h1 className='title has-text-centered'>Register</h1>
-          <form>
+          <form onSubmit={ handleSubmit } name={ name }>
             <div className="field">
               <label className="label">Name</label>
               <div className="control">
@@ -33,11 +33,13 @@ const Register = () => {
               <div className="control">
                 <button className="button is-link">Send</button>
                 <div>
-                <br/>
-                <Link to='/signin'>
-                  <h2 className='has-text-centered'><u>Sign In here</u></h2>
-                </Link>
-              </div>
+                  <br/>
+                  <Link to='/signin'>
+                    <h2 className='has-text-centered'><u>Sign In here</u></h2>
+                  </Link>
+                  <br/>
+                  {error && error.response && <div> {error.response.data}</div>}
+                </div>
               </div>
             </div>
           </form>
