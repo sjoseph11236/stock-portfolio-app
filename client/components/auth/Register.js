@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { auth } from '../../store';
 const Register = ({ name, handleSubmit, error }) => {
   return ( 
     <div className="container">   
@@ -49,4 +51,32 @@ const Register = ({ name, handleSubmit, error }) => {
   );
 }
 
-export default Register;
+const mapStateToProps = state => {
+  return {
+    name: 'signup',
+    displayName: 'Sign Up',
+    error: state.user.error
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleSubmit(evt) {
+      evt.preventDefault()
+      const formName = evt.target.name
+      const email = evt.target.email.value
+      const password = evt.target.password.value
+      dispatch(auth(email, password, formName))
+    }
+  }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
+
+Register.propTypes = {
+  name: PropTypes.string.isRequired,
+  displayName: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  error: PropTypes.object
+}
