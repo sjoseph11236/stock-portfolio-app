@@ -5,7 +5,11 @@ const session = require('express-session');
 const passport = require('passport');
 // Create an express instance
 const app = express();
+const { db } = require('./db/');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const dbStore = new SequelizeStore({ db });
 
+dbStore.sync();
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -29,7 +33,8 @@ app.use(express.urlencoded({extended: true}));
 
 
 app.use(session({
-  secret: 'a wildly insecure secret',
+  secret: process.env.SESSION_SECRET || 'a wildly insecure secret',
+  store: dbStore,
   resave: false,
   saveUninitialized: false
 }));
