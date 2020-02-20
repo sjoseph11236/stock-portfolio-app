@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
   return (  
@@ -24,10 +25,17 @@ const SignIn = () => {
           <div class="field is-grouped">
             <div class="control">
               <button class="button is-link">Send</button>
+              <div>
+                <br/>
+                <Link to='/'>
+                  <h2 className='has-text-centered'><u>Register here</u></h2>
+                </Link>
+              </div>
             </div>
           </div>
         </form>
       </div>
+
     </section>
   </div> 
   );

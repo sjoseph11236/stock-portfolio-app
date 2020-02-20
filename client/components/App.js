@@ -4,8 +4,14 @@ import Register from './auth/Register';
 import { Route, Switch } from 'react-router-dom';
 import SignIn from './auth/SignIn';
 import Transactions from './Transactions';
-
+import Nav from './Nav';
 class App extends Component { 
+  constructor(){
+    super()
+    this.state = { 
+      isSignedIn : false
+    }
+  }
   render() {
     return(
       <div>
@@ -18,14 +24,16 @@ class App extends Component {
                 Welcome user here
               </h2>
           </div>
+
         </section>
-        <Route exact path='/' render={()=> <SignIn />} />
         <section className="section">
+          { this.state.isSignedIn ? <Nav /> : null }
           <Switch> 
+            <Route exact path='/' render={()=> <Register/>} />
             <Route exact path='/home' render={() => <Home />} />
-            <Route exact path='/register' render={() => <Register />}/>
+            <Route exact path='/signin' render={() => <SignIn />}/>
             <Route exact path='/transactions' render={() => <Transactions />} />
-          </Switch>
+          </Switch> 
         </section>
       </div>    
     )

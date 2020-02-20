@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   return ( 
@@ -31,6 +32,12 @@ const Register = () => {
             <div class="field is-grouped">
               <div class="control">
                 <button class="button is-link">Send</button>
+                <div>
+                <br/>
+                <Link to='/signin'>
+                  <h2 className='has-text-centered'><u>Sign In here</u></h2>
+                </Link>
+              </div>
               </div>
             </div>
           </form>
