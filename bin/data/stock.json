@@ -1,0 +1,15 @@
+[
+  {
+    "symbol": "AAPL",
+    "name": "Apple"
+  },
+  {
+    "symbol": "MSFT",
+    "name": "Microsoft"
+
+  },
+  {
+    "symbol": "AMZN",
+    "name": "Amazon"
+  }
+]
