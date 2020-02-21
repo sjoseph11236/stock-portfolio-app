@@ -19,6 +19,10 @@ const Transaction = db.define('transaction', {
     validate: { 
       min: 1
     }
+  },  
+  totalValue: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
   },
   price: {
     type: Sequelize.INTEGER,
