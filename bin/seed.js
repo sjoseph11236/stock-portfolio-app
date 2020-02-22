@@ -23,3 +23,5 @@ seed()
     console.error(err);
     db.close();
   });
+
+  module.exports = seed;
