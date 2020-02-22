@@ -18,4 +18,9 @@ const Stock = db.define('stock', {
   },
 });
 
+Stock.filterIexData = async (data, symbols) => {
+
+}
+
 module.exports = Stock;
+
