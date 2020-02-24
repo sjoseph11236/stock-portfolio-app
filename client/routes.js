@@ -13,6 +13,7 @@ import getChartThunk from './store/reducers/chart';
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    this.props.getChartThunk('aapl,fb,amzn');  
   }
 
   render() {
