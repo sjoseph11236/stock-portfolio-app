@@ -18,9 +18,25 @@ const Stock = db.define('stock', {
   },
 });
 
-Stock.filterIexData = async (data, symbols) => {
-  return [{name:'', symbol:''}]
-}
+Stock.filterIexData = (data, symbols) => {
+  const filteredData = [];
+  
+  symbols.split(',').forEach(symbol => {
+    symbol = symbol.toUpperCase();
+    const quoteData =data[symbol].quote;
+
+    filteredData.push({
+      symbol: quoteData.symbol,
+      name: quoteData.companyName,
+      latestPrice: quoteData.latestPrice,
+      change: quoteData.change,
+      changePercent: quoteData.changePercent,
+      open: quoteData.open
+    });
+  });
+
+  return filteredData;
+};
 
 module.exports = Stock;
 

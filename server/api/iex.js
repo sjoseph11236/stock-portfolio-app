@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { Stock } =require('../db');
 const axios = require('axios');
 const API_TOKEN = require('../../secret');
 
@@ -13,9 +14,10 @@ router.get('/stock/:symbols', async (req, res, next) => {
     const symbols = req.params.symbols;
     const queryStr = `https://sandbox.iexapis.com/stable/stock/market/batch?symbols=${symbols}&types=quote&range=1m&last=5&token=${API_TOKEN}`;
     const { data  } = await axios.get(queryStr);
-    console.log("TCL:  data ",  data['AMZN'].quote .symbol)
+    const filteredIexData = Stock.filterIexData(data, symbols);
+  
     
-    res.json(data);
+    res.json(filteredIexData);
   } catch (error) {
     next(error);
   }
