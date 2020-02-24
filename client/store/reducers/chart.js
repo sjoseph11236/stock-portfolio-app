@@ -44,9 +44,9 @@ const chart = (state = initialState, action) => {
 
   switch(action.type) { 
     case GET_CHART:
-      return { ...state, chart: action.chart }
+      return { ...state, chart: action.chart };
     default:
-      return state
+      return state;
   }
 };
 

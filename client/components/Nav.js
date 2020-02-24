@@ -26,7 +26,7 @@ const Nav = ({ handleClick , isLoggedIn }) => {
                 <u>Transcations</u> 
               </Link>
             </p>
-            <p class="level-item" onClick={handleClick}><a class="button is-success">Log Out</a></p>
+            <p className="level-item" onClick={handleClick}><a className="button is-success">Log Out</a></p>
           </div>
         </nav>
         ): (
