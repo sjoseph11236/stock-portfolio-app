@@ -12,8 +12,8 @@ import getChartThunk from './store/reducers/chart';
 
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
     this.props.getChartThunk('aapl,fb,amzn');  
+    this.props.loadInitialData();
   }
 
   render() {
@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Routes))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Routes));
 
 /**
  * PROP TYPES
