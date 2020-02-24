@@ -13,6 +13,11 @@ const Nav = ({ handleClick , isLoggedIn }) => {
           <div className="level-right">
             <p className="level-item">
               <Link to='/'>
+                <u>Chart</u>
+              </Link>
+            </p>
+            <p className="level-item">
+              <Link to='/portfolio'>
                 <u>Portfolio</u>
               </Link>
             </p>
@@ -24,7 +29,29 @@ const Nav = ({ handleClick , isLoggedIn }) => {
             <p class="level-item" onClick={handleClick}><a class="button is-success">Log Out</a></p>
           </div>
         </nav>
-        ): null}
+        ): (
+          <nav className="level">
+          <div className="level-left">
+          </div>
+          <div className="level-right">
+            <p className="level-item">
+              <Link to='/'>
+                <u>Chart</u>
+              </Link>
+            </p>
+            <p className="level-item">
+              <Link to='/signin'>
+                <u>Sign In</u>
+              </Link>
+            </p>
+            <p className="level-item">
+              <Link to='/register'>
+                <u>register</u> 
+              </Link>
+            </p>
+          </div>
+        </nav>
+        )}
     </div>
   );
 }

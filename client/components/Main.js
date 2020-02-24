@@ -3,7 +3,7 @@ import Portfolio from './Portfolio';
 import Wallet from './Wallet';
 
 
-const Home = () => {
+const Main = () => {
   return ( 
     <section className='section'>
       <div className="tile is-ancestor">  
@@ -14,4 +14,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default Main;
