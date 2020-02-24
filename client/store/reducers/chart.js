@@ -3,7 +3,7 @@ import axios from 'axios';
 /**
  * ACTION TYPES
  */
-const GET_CHART = ' GET_CHART';
+const GET_CHART = 'GET_CHART';
 
 /**
  * INITIAL STATE
@@ -18,6 +18,7 @@ const initialState = {
  */
 
 const getChart = chart => {
+  console.log('Taking action ...')
   return { 
     type: GET_CHART,
     chart
@@ -28,16 +29,19 @@ const getChart = chart => {
 /**
  * THUNK CREATORS
  */
-export const getChartThunk = (symbols = 'aapl,fb,amzn') => async dispactch => {
+export const getChartThunk = (symbols = 'aapl,fb,amzn') => async dispatch => {
   try {
+    console.log('here')
     const { data } = await axios.get(`/api/iex/stock/${symbols}`);
-    dispactch(getChart(data));
+    dispatch(getChart(data));
   } catch (error) {
     console.error(error);
   }
 };
 
-const stock = (state = initialState, action) => {
+const chart = (state = initialState, action) => {
+  console.log('Taking action in reducer ', action.type)
+
   switch(action.type) { 
     case GET_CHART:
       return { ...state, chart: action.chart }

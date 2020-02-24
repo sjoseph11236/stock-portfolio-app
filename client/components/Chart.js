@@ -1,5 +1,6 @@
 import React from 'react';
 import Info from './Info';
+import { connect } from 'react-redux';
 
 const Chart = () => {
   return ( 
@@ -32,4 +33,16 @@ const Chart = () => {
   );
 }
 
-export default Chart;
+const mapStateToProps = state => {
+  return {
+    chart: state.chart.chart
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chart);

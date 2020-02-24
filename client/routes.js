@@ -8,10 +8,12 @@ import SignIn from './components/auth/SignIn';
 import Main from './components/Main';
 import Transactions from './components/Transactions';
 import Chart from './components/Chart';
+import getChartThunk from './store/reducers/chart';
 
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    this.props.getChartThunk('aapl,fb,amzn');  
   }
 
   render() {
@@ -39,7 +41,7 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapStateToProps = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
@@ -47,17 +49,18 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
-    }
+    }, 
+    getChartThunk: symbols => dispatch(getChartThunk(symbols))
   }
 }
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Routes))
 
 /**
  * PROP TYPES
