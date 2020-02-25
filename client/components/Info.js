@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Info = () => {
+const Info = ({ stock }) => {
   return ( 
     <tr>
-      <td>AAPL - </td>
-      <td>Apple </td>
-      <td>6 shares</td>
-      <td>$2043.09</td>
+      <td>{stock.symbol} - </td>
+      <td>{stock.name}</td>
+      <td>{stock.latestPrice}</td>
+      <td>{stock.change}</td>
+      <td>{stock.changePercent}</td>
     </tr>
   );
 }

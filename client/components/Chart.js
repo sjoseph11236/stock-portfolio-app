@@ -2,7 +2,8 @@ import React from 'react';
 import Info from './Info';
 import { connect } from 'react-redux';
 
-const Chart = ({ chart}) => {
+
+const Chart = ({ chart }) => {
   console.log("TCL: Chart -> chart", chart)
   return ( 
     <section className="section">
@@ -15,14 +16,17 @@ const Chart = ({ chart}) => {
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Ticker</th>
+                    <th>Symbol</th>
                     <th>Name</th>
-                    <th>Shares</th>
-                    <th>Price</th>
+                    <th>Latest Price</th>
+                    <th>Change</th>
+                    <th>Change Percent</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <Info />
+                  {chart.map((stock, idx) => {
+                    return <Info key={idx} stock={stock}/>
+                  })}
                 </tbody>
               </table>
             </div>  
@@ -40,10 +44,6 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    
-  }
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chart);
+
+export default connect(mapStateToProps, null )(Chart);

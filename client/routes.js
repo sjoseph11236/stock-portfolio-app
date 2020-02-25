@@ -16,9 +16,9 @@ class Routes extends Component {
     super()
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.props.loadInitialData();
-    this.props.getChartThunk('aapl,fb,amzn');  
+    this.props.getChartThunk();  
   }
 
   render() {
