@@ -18,7 +18,6 @@ const initialState = {
  */
 
 const getChart = chart => {
-  console.log('Taking action ...')
   return { 
     type: GET_CHART,
     chart
@@ -30,21 +29,16 @@ const getChart = chart => {
  * THUNK CREATORS
  */
 export const getChartThunk = (symbols = 'aapl,fb,amzn') => {
-  console.log('here')
-
   return async dispatch => {
     try {
       const { data } = await axios.get(`/api/iex/stock/${symbols}`);
+      console.log('here', data)
       dispatch(getChart(data));
     } catch (error) {
       console.error(error);
     }
   };
 }
-
-
-
-
 
 const chart = (state = initialState, action) => {
   console.log('Taking action in chart reducer ', action, state)
