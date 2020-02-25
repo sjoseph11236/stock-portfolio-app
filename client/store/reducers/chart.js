@@ -29,20 +29,24 @@ const getChart = chart => {
 /**
  * THUNK CREATORS
  */
-export const getChartThunk = (symbols = 'aapl,fb,amzn') => async dispatch => {
+export const getChartThunk = (symbols = 'aapl,fb,amzn') => {
   console.log('here')
-  try {
-    const { data } = await axios.get(`/api/iex/stock/${symbols}`);
-    dispatch(getChart(data));
-  } catch (error) {
-    console.error(error);
-  }
-};
+
+  return async dispatch => {
+    try {
+      const { data } = await axios.get(`/api/iex/stock/${symbols}`);
+      dispatch(getChart(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
 
 const chart = (state = initialState, action) => {
-  console.log('Taking action in reducer ', action)
+  console.log('Taking action in chart reducer ', action)
 
-  switch(action.type) { 
+  switch(action.type) {
     case GET_CHART:
       return { ...state, chart: action.chart };
     default:
