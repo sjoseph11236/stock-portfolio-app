@@ -6,8 +6,8 @@ import user from './reducers/user';
 import chart from './reducers/chart';
 
 const reducer = combineReducers({ 
-  user, 
-  chart
+  chart,
+  user
 });
 
 const middleware = composeWithDevTools(
@@ -15,5 +15,5 @@ const middleware = composeWithDevTools(
 )
 const store = createStore(reducer, middleware)
 
-export default store;
 export * from './reducers/user';
+export default store;
