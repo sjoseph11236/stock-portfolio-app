@@ -8,13 +8,17 @@ import SignIn from './components/auth/SignIn';
 import Main from './components/Main';
 import Transactions from './components/Transactions';
 import Chart from './components/Chart';
-import getChartThunk from './store/reducers/chart';
+import { getChartThunk }from './store/reducers/chart';
 
 
 class Routes extends Component {
+  constructor() {
+    super()
+  }
+
   async componentDidMount() {
     this.props.loadInitialData();
-    await this.props.getChartThunk('aapl,fb,amzn');  
+    this.props.getChartThunk('aapl,fb,amzn');  
   }
 
   render() {
