@@ -10,10 +10,11 @@ import Transactions from './components/Transactions';
 import Chart from './components/Chart';
 import getChartThunk from './store/reducers/chart';
 
+
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
-    this.props.getChartThunk('aapl,fb,amzn');  
+    // this.props.getChartThunk('aapl,fb,amzn');  
   }
 
   render() {
@@ -54,7 +55,7 @@ const mapDispatchToProps = dispatch => {
     loadInitialData() {
       dispatch(me())
     }, 
-    getChartThunk: symbols => dispatch(getChartThunk(symbols))
+    getChartThunk: symbols => dispatch(getChartThunk(symbols)),
   }
 }
 

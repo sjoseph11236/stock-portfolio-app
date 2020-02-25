@@ -43,6 +43,9 @@ export const getChartThunk = (symbols = 'aapl,fb,amzn') => {
 }
 
 
+
+
+
 const chart = (state = initialState, action) => {
   console.log('Taking action in chart reducer ', action, state)
 
