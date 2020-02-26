@@ -1,5 +1,6 @@
 import React from 'react';
-import Table from './Table';
+import Receipts from './Receipts';
+
 const Transactions = () => {
   return (  
     <section className="section">
@@ -19,7 +20,7 @@ const Transactions = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <Table />
+                  <Receipts />
                 </tbody>
               </table>
             </div>  
