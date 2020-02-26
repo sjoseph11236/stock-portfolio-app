@@ -1,11 +1,12 @@
 import React from 'react';
 
-const Receipts = () => {
+const Receipts = ({ transaction }) => {
   return ( 
     <tr>
-      <td>BUY APPL- </td>
-      <td>6 Shares </td>
-      <td>@ 300.00</td>
+      <td>{transaction.type}</td>
+      <td>{transaction.stock.symbol} - </td>
+      <td>{transaction.quantity}</td>
+      <td>@ {transaction.price / 100 }</td>
     </tr>
   );
 }

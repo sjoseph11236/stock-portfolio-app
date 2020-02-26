@@ -1,7 +1,9 @@
 import React from 'react';
 import Receipts from './Receipts';
+import { connect } from 'react-redux';
 
-const Transactions = () => {
+const Transactions = ({ transactions }) => {
+
   return (  
     <section className="section">
       <div className="tile is-parent">
@@ -14,13 +16,17 @@ const Transactions = () => {
               <table className="table">
                 <thead>
                   <tr>
+                    <th>Type</th>
                     <th>Ticker</th>
                     <th>Shares</th>
                     <th>Price</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <Receipts />
+
+                  {transactions.map( transaction => { 
+                    return <Receipts key={transaction.id} transaction={transaction} />
+                  })}
                 </tbody>
               </table>
             </div>  
@@ -33,4 +39,9 @@ const Transactions = () => {
   );
 }
 
-export default Transactions;
+const mapStateToProps = state => { 
+  return { 
+    transactions: state.transaction.transactions
+  }
+}
+export default connect(mapStateToProps, null)(Transactions);
