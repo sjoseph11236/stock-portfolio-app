@@ -7,10 +7,15 @@ router.get('/:userId', async (req, res, next ) => {
       where: {
         id: req.params.userId
       }, 
-      include: [{model: Stock}]
+      include: [{ model: Stock }]
     })
-  
-    res.send(transactions);
+    
+    if(transactions.length) {
+      res.send(transactions);
+    }
+    else { 
+      res.status(404).send('No transactions found for this user');
+    }
   } catch (error) {
     console.error(error);
     next(error);

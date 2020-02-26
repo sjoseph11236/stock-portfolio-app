@@ -4,10 +4,12 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import user from './reducers/user';
 import chart from './reducers/chart';
+import transaction from './reducers/transaction';
 
 const reducer = combineReducers({ 
   chart,
   user,
+  transaction
 });
 
 const middleware = composeWithDevTools(
