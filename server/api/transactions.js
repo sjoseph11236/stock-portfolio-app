@@ -5,7 +5,7 @@ router.get('/:userId', async (req, res, next ) => {
   try {
     const transactions = await Transaction.findAll({
       where: {
-        id: req.params.userId
+        userId: req.params.userId
       }, 
       include: [{ model: Stock }]
     })
