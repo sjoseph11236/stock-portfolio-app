@@ -17,20 +17,25 @@ const Portfolio = db.define('portfolio', {
 
 Portfolio.getPortfolioStocks = async (portfolio) => { 
   
-  const portfolioStocks = [];
+  const stocks = [];
+  let symbols = '';
 
   for(let i = 0; i < portfolio.length; i++) { 
     const item = portfolio[i];
-    
     const stock = await Stock.findByPk(item.stockId);
-    portfolioStocks.push({ 
+
+    symbols += `${stock.symbol},`;
+
+    stocks.push({ 
       stockId: item.stockId, 
       symbol:stock.symbol, 
       name: stock.name, 
       quantity: item.quantity
     });
   }
-
+  
+  const portfolioStocks = { symbols, stocks };
+  
   return portfolioStocks;
 };
 

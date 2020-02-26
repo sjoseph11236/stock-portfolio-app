@@ -16,7 +16,6 @@ router.get('/:userId', async (req, res, next) => {
     else { 
       res.status(404).send('No portfolio found');      
     }
-
   } catch (error) {
     console.error(error);
     next(error);
