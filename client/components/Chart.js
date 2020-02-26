@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 
 const Chart = ({ chart }) => {
-  console.log("TCL: Chart -> chart", chart)
   return ( 
     <section className="section">
       <div className="tile is-parent">

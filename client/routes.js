@@ -9,21 +9,18 @@ import Main from './components/Main';
 import Transactions from './components/Transactions';
 import Chart from './components/Chart';
 import { getChartThunk }from './store/reducers/chart';
-
+import { getTransactionsThunk } from './store/reducers/transaction';
 
 class Routes extends Component {
-  constructor() {
-    super()
-  }
 
-  componentDidMount() {
-    this.props.loadInitialData();
-    this.props.getChartThunk();  
+  async componentDidMount() {
+    await this.props.loadInitialData();
+    await this.props.getChartThunk();  
+    await this.props.getTransactionsThunk(this.props.userId);
   }
 
   render() {
     const { isLoggedIn } = this.props
-    console.log("TCL: Routes -> render -> isLoggedIn ", isLoggedIn )
 
     return (
       <Switch>
@@ -50,7 +47,8 @@ const mapStateToProps = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userId: state.user.id
   }
 }
 
@@ -60,6 +58,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(me())
     }, 
     getChartThunk: symbols => dispatch(getChartThunk(symbols)),
+    getTransactionsThunk: userId => dispatch(getTransactionsThunk(userId))
   }
 }
 

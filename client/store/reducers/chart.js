@@ -40,8 +40,6 @@ export const getChartThunk = (symbols = 'aapl,fb,amzn') => {
 }
 
 const chart = (state = initialState, action) => {
-  console.log('Taking action in chart reducer ', action, state)
-
   switch(action.type) {
     case GOT_CHART:
       return { ...state, chart: action.chart };
