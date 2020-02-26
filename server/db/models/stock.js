@@ -24,6 +24,7 @@ Stock.filterIexData = (data, symbols) => {
   symbols.split(',').forEach(symbol => {
     symbol = symbol.toUpperCase();
     const quoteData =data[symbol].quote;
+  
 
     filteredData.push({
       symbol: quoteData.symbol,

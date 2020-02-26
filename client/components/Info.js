@@ -8,6 +8,7 @@ const Info = ({ stock }) => {
       <td>{stock.latestPrice}</td>
       <td>{stock.change}</td>
       <td>{stock.changePercent}</td>
+      <td>{stock.open}</td>
     </tr>
   );
 }
