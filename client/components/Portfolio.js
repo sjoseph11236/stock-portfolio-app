@@ -1,5 +1,5 @@
 import React from 'react';
-import Info from './Info';
+import Table from './Table';
 
 const Portfolio = () => {
   return ( 
@@ -18,7 +18,7 @@ const Portfolio = () => {
                 </tr>
               </thead>
               <tbody>
-                <Info />
+                <Table />
               </tbody>
             </table>
           </div>  

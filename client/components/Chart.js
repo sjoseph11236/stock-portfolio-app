@@ -21,7 +21,6 @@ const Chart = ({ chart }) => {
                     <th>Latest Price</th>
                     <th>Change</th>
                     <th>Change Percent</th>
-                    <th>Open</th>
                   </tr>
                 </thead>
                 <tbody>

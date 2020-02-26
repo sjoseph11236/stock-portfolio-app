@@ -1,5 +1,5 @@
 import React from 'react';
-import Info from './Info';
+import Table from './Table';
 const Transactions = () => {
   return (  
     <section className="section">
@@ -19,7 +19,7 @@ const Transactions = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <Info />
+                  <Table />
                 </tbody>
               </table>
             </div>  
