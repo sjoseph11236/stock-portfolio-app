@@ -78,7 +78,8 @@ class  Wallet extends Component {
 
 const mapStateToProps = state => {
   return {
-    error: state
+    error: state,
+    cash: state.user.cash
   }
 };
 

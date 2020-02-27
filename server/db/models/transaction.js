@@ -9,9 +9,6 @@ const Transaction = db.define('transaction', {
       isIn:[["BUY", "SELL"]]
     }
   },
-  date: {
-    type:Sequelize.DATE,
-  },
   quantity: { 
     type: Sequelize.INTEGER, 
     allowNull: false,
