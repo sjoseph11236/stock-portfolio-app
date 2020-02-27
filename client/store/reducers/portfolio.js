@@ -39,16 +39,20 @@ const updatePortfolioTotal = portfolioTotal => {
 
 export const getPortfolioThunk = userId => {
   return async dispatch => {
-    let symbols;
-    let stocks; 
     try {
       const { data } = await axios.get(`/api/portfolio/${userId}`);
-      symbols = data.symbols;
-      stocks = data.stocks;
+      const symbols = data.symbols;
+      const stocks = data.stocks;
+      dispatch(getPortfolioStockData(symbols,stocks));
     } catch (error) {
       console.error(error);
     }
+  } 
+};
 
+
+export const getPortfolioStockData = (symbols, stocks)=> {
+  return async dispatch => { 
     try {
       const { data } = await axios.get(`/api/iex/stock/${symbols}`);   
       let portfolioTotal = 0;
@@ -58,15 +62,13 @@ export const getPortfolioThunk = userId => {
           portfolioTotal += ((stock.latestPrice * 100) * stocks[idx].quantity);
         }
       });
-      console.log('>>>>>>>>', portfolioTotal);
-
       dispatch(gotPortfolio(data));   
       dispatch(updatePortfolioTotal(portfolioTotal));
     } catch (error) {
       console.error(error);
     }
-  } 
-}
+  }
+};
 
 const portfolio = (state = initialState, action) => {
   switch(action.type) { 
