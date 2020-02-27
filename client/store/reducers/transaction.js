@@ -5,15 +5,17 @@ import axios from 'axios';
  */
 const GOT_TRANSACTIONS = 'GOT_TRANSACTIONS';
 const GOT_PURCHASE = 'GOT_PURCHASE';
-
+const GOT_ERROR = 'GOT_ERROR';
+const CLEAR_ERROR = 'CLEAR_ERROR';
 /**
  * INITIAL STATE
  */
 
 const initialState  = { 
   transactions : [],
-  purchase: {}
-}
+  purchase: {},
+  error: ''
+};
 
 /**
  * ACTION CREATORS
@@ -24,15 +26,27 @@ const gotTransactions = transactions => {
     type: GOT_TRANSACTIONS,
     transactions
   }
-}
+};
 
 const gotPurchase = purchase => { 
   return { 
     type: GOT_PURCHASE,
     purchase
   }
-}
+};
 
+export const gotError = message => { 
+  return { 
+    type: GOT_ERROR,
+    message
+  }
+};
+
+export const clearError = () => { 
+  return { 
+    type: CLEAR_ERROR
+  }
+}
 /**
  * THUNK CREATORS
  */
@@ -43,6 +57,10 @@ export const getPurchaseTickerDataThunk = symbols => {
       const { data } = await axios.get(`/api/iex/stock/${symbols}`);
       dispatch(gotPurchase(data[0]));
     } catch (error) {
+      dispatch(gotError("Ticker symbol doesn't exisit, Try different one"));
+      setTimeout(() => { 
+        dispatch(clearError());
+      }, 3000);
       console.error(error);
     }
   };
@@ -65,6 +83,10 @@ const transaction = (state = initialState, action) => {
       return { ...state, transactions: action.transactions };
     case GOT_PURCHASE: 
       return { ...state, purchase: action.purchase };
+    case GOT_ERROR:
+      return { ...state, error: action.message };
+    case CLEAR_ERROR:
+      return { ...state, error: '' };
     default: 
       return state;
   }
