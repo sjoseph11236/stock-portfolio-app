@@ -9,25 +9,53 @@ class  Wallet extends Component {
     this.state = { 
       ticker: '',
       quantity: '',
-      error: ''
+      error: '',
+      inputColors: {
+        ticker:'',
+        quantity:''
+      }
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.checkIfCanAfford = this.checkIfCanAfford.bind(this);
+    this.checkIfWholeNumber = this.checkIfWholeNumber.bind(this);
   }
 
   async handleSubmit(evt) {
     evt.preventDefault();
     const { getPurchaseTickerDataThunk, gotError, clearError } = this.props;
     const { ticker, quantity } = this.state;
-    // Get ticker latest Price
+
+    // Check if quantity is whole number
+    const isWholeNumber = this.checkIfWholeNumber();
+    if(!isWholeNumber) {
+      gotError('Amount must be a whole number');
+      this.setState({inputColors:{quantity:'is-danger'}})
+      setTimeout(() => { 
+        clearError()
+        this.setState({inputColors:{ quantity:''}})
+      }, 3000);
+      return;
+    } 
+
+    // Get ticker and latest Price
     await getPurchaseTickerDataThunk(ticker);
+    if(this.props.error){
+      this.setState({inputColors:{ticker:'is-danger'}})
+      setTimeout(() => { 
+        clearError()
+        this.setState({inputColors:{ ticker:''}})
+      }, 3000);
+    }
+
     // Check if user can afford. 
     const canAfford = this.checkIfCanAfford()
     if(!canAfford)  {
       gotError("Can't afford, try a different amount.");
+      this.setState({inputColors:{quantity:'is-danger'}})
       setTimeout(() => { 
         clearError()
+        this.setState({inputColors:{ quantity:''}})
       }, 3000);
     }
     else { 
@@ -38,10 +66,15 @@ class  Wallet extends Component {
   
       this.setState({
         ticker: '',
-        quantity: ''
+        quantity: '',
       })
     }
-  }
+  };
+
+  checkIfWholeNumber() {
+    const { quantity } = this.state;
+    return  Number.isInteger(Number(quantity));
+  };
 
   checkIfCanAfford(){
     const { purchase, cash } = this.props;
@@ -52,7 +85,7 @@ class  Wallet extends Component {
     const total = price * quantity * 100;
     if(total > cash) return false;
     return true;
-  }
+  };
   
   handleChange(event) {
     this.setState({
@@ -61,7 +94,7 @@ class  Wallet extends Component {
   }
 
   render() {
-    const { ticker, quantity } = this.state;
+    const { ticker, quantity, inputColors } = this.state;
     const { cash, error } = this.props;
     return ( 
       <div className="tile is-parent">
@@ -74,14 +107,14 @@ class  Wallet extends Component {
                 <div className="field">
                   <label className="label">Ticker</label>
                   <div className="control">
-                    <input className="input" type="text" placeholder="Ticker" name="ticker" onChange={this.handleChange} value={ticker} />
+                    <input className={`input ${inputColors.ticker}`} type="text" placeholder="Ticker" name="ticker" onChange={this.handleChange} value={ticker} />
                   </div>
                 </div>
     
                 <div className="field">
                   <label className="label">Amount</label>
                   <div className="control">
-                    <input className="input is-success" type="text" placeholder="Qty" name="quantity" onChange={this.handleChange} value={quantity}/>
+                    <input className={`input ${inputColors.quantity}`} type="text" placeholder="Qty" name="quantity" onChange={this.handleChange} value={quantity}/>
                   </div>
                 </div>
                 <div className="field is-grouped">
