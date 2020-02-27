@@ -19,6 +19,12 @@ class  Wallet extends Component {
       stock: this.state.ticker,
       quantity: Number(this.state.quantity)
     }
+
+    this.setState({
+      ticker: '',
+      quantity: ''
+    })
+
   }
 
 
@@ -54,7 +60,7 @@ class  Wallet extends Component {
                 </div>
                 <div className="field is-grouped">
                   <div className="control">
-                    <button className="button is-link">Buy</button>
+                    <button className="button is-link"  onClick={(e)=> handleSubmit(e)} disabled={ ticker && quantity ? false : true }>Buy</button>
                     <div>
                       <br/>
                       {error && error.response && <div> {error.response.data}</div>}
