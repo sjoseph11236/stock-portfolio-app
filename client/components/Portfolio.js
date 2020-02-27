@@ -1,7 +1,8 @@
 import React from 'react';
 import Table from './Table';
+import { connect } from 'react-redux';
 
-const Portfolio = () => {
+const Portfolio = ({ stocks }) => {
   return ( 
     <div className="tile is-parent">
       <article className="tile is-child notification">
@@ -29,4 +30,4 @@ const Portfolio = () => {
   );
 }
 
-export default Portfolio;
+export default connect(mapStateToProps, null)(Portfolio);

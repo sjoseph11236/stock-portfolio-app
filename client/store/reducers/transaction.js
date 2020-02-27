@@ -32,7 +32,6 @@ export const getTransactionsThunk = userId => {
   return async dispatch => {
     try {
       const { data } = await axios.get(`/api/transactions/${userId}`)
-      console.log("TCL: data", data);
       dispatch(gotTransactions(data));
     } catch (error) {
       console.error(error);

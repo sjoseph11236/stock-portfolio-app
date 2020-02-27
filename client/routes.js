@@ -10,6 +10,7 @@ import Transactions from './components/Transactions';
 import Chart from './components/Chart';
 import { getChartThunk }from './store/reducers/chart';
 import { getTransactionsThunk } from './store/reducers/transaction';
+import { getPortfolioThunk } from './store/reducers/portfolio';
 
 class Routes extends Component {
 
@@ -17,6 +18,7 @@ class Routes extends Component {
     await this.props.loadInitialData();
     await this.props.getChartThunk();  
     await this.props.getTransactionsThunk(this.props.userId);
+    await this.props.getPortfolioThunk(this.props.userId);
   }
 
   render() {
@@ -58,7 +60,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(me())
     }, 
     getChartThunk: symbols => dispatch(getChartThunk(symbols)),
-    getTransactionsThunk: userId => dispatch(getTransactionsThunk(userId))
+    getTransactionsThunk: userId => dispatch(getTransactionsThunk(userId)),
+    getPortfolioThunk: userId => dispatch(getPortfolioThunk(userId))
   }
 }
 

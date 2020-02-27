@@ -34,6 +34,8 @@ Portfolio.getPortfolioStocks = async (portfolio) => {
     });
   }
   
+  symbols = symbols.slice(0, -1);
+
   const portfolioStocks = { symbols, stocks };
   
   return portfolioStocks;

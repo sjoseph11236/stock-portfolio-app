@@ -9,7 +9,7 @@
     "stockId": 1
   },
   {
-    "quantity": 1,
+    "quantity": 2,
     "type": "BUY",
     "price": 50000,
     "totalValue": 50000,

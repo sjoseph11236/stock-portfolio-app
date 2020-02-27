@@ -5,11 +5,13 @@ import { createLogger } from 'redux-logger';
 import user from './reducers/user';
 import chart from './reducers/chart';
 import transaction from './reducers/transaction';
+import portfolio from './reducers/portfolio';
 
 const reducer = combineReducers({ 
   chart,
   user,
-  transaction
+  transaction,
+  portfolio
 });
 
 const middleware = composeWithDevTools(

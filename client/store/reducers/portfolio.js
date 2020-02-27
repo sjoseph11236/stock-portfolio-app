@@ -31,10 +31,24 @@ const gotPortfolio = stocks => {
 
 export const getPortfolioThunk = userId => {
   return async dispatch => {
+    let symbols;
+    let stocks; 
     try {
-      const { data } = await axios.get(`/api/portfolio/${userId}`)
-      console.log("TCL: data", data);
-      // dispatch(gotPortfolio(data));
+      const { data } = await axios.get(`/api/portfolio/${userId}`);
+      symbols = data.symbols;
+      stocks = data.stocks;
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      const { data } = await axios.get(`/api/iex/stock/${symbols}`);   
+      data.map((stock, idx ) => {
+        if(stocks[idx].symbol === stock.symbol){
+          stock.quantity = stocks[idx].quantity
+        }
+      });
+      dispatch(gotPortfolio(data));   
     } catch (error) {
       console.error(error);
     }
