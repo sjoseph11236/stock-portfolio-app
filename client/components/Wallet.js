@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPurchaseTickerDataThunk, gotError, clearError } from '../store/reducers/transaction';
-
+import { purchaseThunk } from '../store/reducers/user';
 
 class  Wallet extends Component {
   constructor() {
@@ -23,7 +23,7 @@ class  Wallet extends Component {
 
   async handleSubmit(evt) {
     evt.preventDefault();
-    const { getPurchaseTickerDataThunk, gotError, clearError } = this.props;
+    const { getPurchaseTickerDataThunk, gotError, clearError, userId, purchaseThunk } = this.props;
     const { ticker, quantity } = this.state;
 
     // Check if quantity is whole number
@@ -46,6 +46,7 @@ class  Wallet extends Component {
         clearError()
         this.setState({inputColors:{ ticker:''}})
       }, 3000);
+      return;
     }
 
     // Check if user can afford. 
@@ -59,11 +60,20 @@ class  Wallet extends Component {
       }, 3000);
     }
     else { 
+      
       const transaction = { 
+        userId,
+        type: 'BUY',
         stock: ticker,
-        quantity: Number(quantity)
+        name: this.props.purchase.name,
+        price: Math.round(this.props.purchase.latestPrice) * 100,
+        quantity: Number(quantity),
+        totalValue:(Math.round(this.props.purchase.latestPrice) * 100 ) * Number(quantity)
       }
-  
+      
+      // update user cash
+      purchaseThunk(transaction.totalValue);
+
       this.setState({
         ticker: '',
         quantity: '',
@@ -148,6 +158,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getPurchaseTickerDataThunk: symbols => dispatch(getPurchaseTickerDataThunk(symbols)),
     gotError: message => dispatch(gotError(message)),
+    purchaseThunk: amount => dispatch(purchaseThunk(amount)),
     clearError: () => dispatch(clearError())
   }
 };

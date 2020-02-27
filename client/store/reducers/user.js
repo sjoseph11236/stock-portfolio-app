@@ -5,6 +5,7 @@ import axios from 'axios';
  */
 const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
+const PURCHASE = 'PURCHASE';
 
 
 /**
@@ -17,7 +18,7 @@ const defaultUser = {};
  */
 const getUser = user => ({type: GET_USER, user});
 const removeUser = () => ({type: REMOVE_USER});
-
+const purchase = amount =>({type: PURCHASE, amount});
 /**
  * THUNK CREATORS
  */
@@ -55,14 +56,25 @@ export const logout = () => async dispatch => {
   }
 }
 
+export const purchaseThunk = amount => async dispatch => {
+console.log("TCL: amount ", amount )
+  try {
+    dispatch(purchase(amount));
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 const user = (state = defaultUser, action) => {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return action.user;
     case REMOVE_USER:
-      return defaultUser
+      return defaultUser;
+    case PURCHASE:
+      return {...state, cash: state.cash - action.amount }; 
     default:
-      return state
+      return state;
   }
 }
 

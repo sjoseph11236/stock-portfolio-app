@@ -59,7 +59,8 @@ export const getPortfolioStockData = (symbols, stocks) => {
       data.map((stock, idx ) => {
         if(stocks[idx].symbol === stock.symbol){
           stock.quantity = stocks[idx].quantity;
-          portfolioTotal += ((Math.round(stock.latestPrice) * 100) * stocks[idx].quantity);
+          stock.latestPrice = Math.round(stock.latestPrice);
+          portfolioTotal += ((stock.latestPrice * 100) * stocks[idx].quantity);
         }
       });
       dispatch(gotPortfolio(data));   
