@@ -41,7 +41,6 @@ export const auth = (name, email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
-
   } catch (error) {
     console.error(error)
   }
@@ -56,10 +55,12 @@ export const logout = () => async dispatch => {
   }
 }
 
-export const purchaseThunk = amount => async dispatch => {
-console.log("TCL: amount ", amount )
+export const purchaseThunk = amount => async (dispatch, getState) => {
   try {
-    dispatch(purchase(amount));
+    const { user } = getState();
+    const difference = user.cash - amount;
+    const { data } = await axios.put(`/api/user/${user.id}`, { cash: difference });
+    dispatch(purchase(data.cash));
   } catch (err) {
     console.error(err);
   }
@@ -72,7 +73,7 @@ const user = (state = defaultUser, action) => {
     case REMOVE_USER:
       return defaultUser;
     case PURCHASE:
-      return {...state, cash: state.cash - action.amount }; 
+      return {...state, cash: action.amount }; 
     default:
       return state;
   }
