@@ -8,6 +8,7 @@ class  Wallet extends Component {
     this.state = { 
       ticker: '',
       quantity: '',
+      error: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -22,30 +23,32 @@ class  Wallet extends Component {
     await getPurchaseTickerDataThunk(ticker);
     // Check if user can afford. 
     const canAfford = this.checkIfCanAfford()
-    console.log("TCL: Wallet -> handleSubmit -> canAfford ", canAfford )
-    if(!canAfford) console.log("can't afford");
-    
-    const transaction = { 
-      stock: ticker,
-      quantity: Number(quantity)
+    if(!canAfford)  {
+      this.setState({ error: "Can't afford, try a different amount."});
+      setTimeout(() => { 
+        this.setState({ error: ''})
+      }, 3000);
     }
-
-    this.setState({
-      ticker: '',
-      quantity: ''
-    })
-
+    else { 
+      const transaction = { 
+        stock: ticker,
+        quantity: Number(quantity)
+      }
+  
+      this.setState({
+        ticker: '',
+        quantity: ''
+      })
+    }
   }
 
   checkIfCanAfford(){
     const { purchase, cash } = this.props;
     const { quantity } = this.state;
-    const price = purchase.latestPrice;
-    console.log("TCL: Wallet -> checkIfCanAfford -> price", price)
+    const price = Math.round(purchase.latestPrice);
 
     // Calculate total value of transaction. 
-    const total = Math.round(price * quantity * 100);
-    console.log("TCL: Wallet -> checkIfCanAfford -> total", total)
+    const total = price * quantity * 100;
     if(total > cash) return false;
     return true;
   }
@@ -57,8 +60,8 @@ class  Wallet extends Component {
   }
 
   render() {
-    const { ticker, quantity } = this.state;
-    const { error, cash } = this.props;
+    const { ticker, quantity, error } = this.state;
+    const {  cash } = this.props;
     return ( 
       <div className="tile is-parent">
         <article className="tile is-child notification is-success">
@@ -85,7 +88,7 @@ class  Wallet extends Component {
                     <button className="button is-link"  disabled={ ticker && quantity ? false : true }>Buy</button>
                     <div>
                       <br/>
-                      {error && error.response && <div> {error.response.data}</div>}
+                      {error && <div className='has-text-dark'>{ error }</div>}
                     </div>
                   </div>
                 </div>
@@ -100,7 +103,6 @@ class  Wallet extends Component {
 
 const mapStateToProps = state => {
   return {
-    error: state,
     cash: state.user.cash,
     purchase: state.transaction.purchase
   }
