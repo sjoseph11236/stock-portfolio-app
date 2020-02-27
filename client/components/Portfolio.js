@@ -3,7 +3,6 @@ import Table from './Table';
 import { connect } from 'react-redux';
 
 const Portfolio = ({ stocks, portfolioTotal }) => {
-  console.log("TCL: Portfolio -> portfolioTotal ", portfolioTotal )
   return ( 
     <div className="tile is-parent">
       <article className="tile is-child notification">
