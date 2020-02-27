@@ -51,7 +51,7 @@ export const getPortfolioThunk = userId => {
 };
 
 
-export const getPortfolioStockData = (symbols, stocks)=> {
+export const getPortfolioStockData = (symbols, stocks) => {
   return async dispatch => { 
     try {
       const { data } = await axios.get(`/api/iex/stock/${symbols}`);   
@@ -69,6 +69,7 @@ export const getPortfolioStockData = (symbols, stocks)=> {
     }
   }
 };
+
 
 const portfolio = (state = initialState, action) => {
   switch(action.type) { 

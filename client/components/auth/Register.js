@@ -16,7 +16,7 @@ class Register extends Component {
   }
 
   handleSubmit(evt) {
-    evt.preventDefault()
+    evt.preventDefault();
     const name = this.state.name;
     const email = this.state.email;
     const password = this.state.password;

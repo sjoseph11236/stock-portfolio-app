@@ -28,7 +28,7 @@ const gotChart = chart => {
 /**
  * THUNK CREATORS
  */
-export const getChartThunk = (symbols = 'aapl,fb,amzn') => {
+export const getChartThunk = (symbols = 'aapl,amzn,fb, msft') => {
   return async dispatch => {
     try {
       const { data } = await axios.get(`/api/iex/stock/${symbols}`);
