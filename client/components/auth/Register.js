@@ -16,12 +16,12 @@ class Register extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  async handleSubmit(evt) {
+  handleSubmit(evt) {
     evt.preventDefault();
     const name = this.state.name;
     const email = this.state.email;
     const password = this.state.password;
-    await this.props.auth(name, email, password, 'signup');
+    this.props.auth(name, email, password, 'signup');
   }
 
   handleChange(event) {

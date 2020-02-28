@@ -5,12 +5,13 @@ import { logout } from '../store';
 import { clearTransactions } from '../store/reducers/transaction';
 import { clearPortfolio } from '../store/reducers/portfolio';
 
-const Nav = ({ handleClick , isLoggedIn }) => {
+const Nav = ({ handleClick , isLoggedIn, name }) => {
   return ( 
     <div>
       {isLoggedIn ? (
         <nav className="level">
           <div className="level-left">
+            <h1 className="level-item title is-4">Welcome, {name}!</h1>
           </div>
           <div className="level-right">
             <p className="level-item">
@@ -60,7 +61,8 @@ const Nav = ({ handleClick , isLoggedIn }) => {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    name: state.user.name
   }
 }
 
