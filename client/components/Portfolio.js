@@ -14,6 +14,9 @@ const Portfolio = ({ stocks, portfolioTotal }) => {
               <thead>
                 <tr>
                   <th>Ticker</th>
+                  <th>Name</th>
+                  <th>Change</th>
+                  <th>Change Percent</th>
                   <th>Price</th>
                   <th>Shares</th>
                   <th>Total</th>

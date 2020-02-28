@@ -13,7 +13,10 @@ export const updateData = (data, stocks) => {
 
 const colorize = data => { 
   data.map(info => {
-    if(info.change < 0 ){
+    if(info.change == 0 ){
+      info.colorize = 'has-text-grey';
+    }
+    else if(info.change < 0 ){
       info.colorize = 'has-text-danger';
     }
     else {
