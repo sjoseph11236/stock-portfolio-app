@@ -77,6 +77,17 @@ export const getTransactionsThunk = userId => {
   } 
 }
 
+export const addTransactionThunk = transaction => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.post('/api/transactions/', transaction);
+      dispatch(gotTransactions(data));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+
 const transaction = (state = initialState, action) => {
   switch(action.type) { 
     case GOT_TRANSACTIONS: 
