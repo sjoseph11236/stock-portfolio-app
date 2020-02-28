@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Route } from 'react-router-dom';
+import { withRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { me } from './store'
 import Register from './components/auth/Register';
@@ -27,19 +27,19 @@ class Routes extends Component {
     const { isLoggedIn } = this.props
 
     return (
-      <>
+      <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path= '/' component={Chart} />
-        <Route path="/register" component={Register} />
+        <Route exact path="/register" component={Register} />
         <Route exact path="/signin" component={SignIn} />
         {isLoggedIn && (
-          <>
+          <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route  path="/portfolio" component={ Main } />
-            <Route  path="/transactions" component={Transactions} /> 
-          </>
+            <Route  exact path="/portfolio" component={ Main } />
+            <Route  exact path="/transactions" component={Transactions} /> 
+          </Switch>
         )}
-      </>
+      </Switch>
     )
   }
 }

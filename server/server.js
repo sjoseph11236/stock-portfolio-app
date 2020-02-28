@@ -55,6 +55,12 @@ app.use('/api', require('./api'));
 // Static middleware
 app.use(express.static(path.join(__dirname, '../public')));
 
+// sends index.html
+  app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+  })
+
+
 // 404 
 app.use(function(req, res, next) {
   const err = new Error('not found.');
