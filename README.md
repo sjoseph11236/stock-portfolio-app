@@ -4,7 +4,6 @@
     - fix sequelize error for short password
   - Display transaction history in order and display dates. 
     -reference Sequelize order.
-    -Install moment possibly. 
   -deploy 
 
 ### SOURCES:
