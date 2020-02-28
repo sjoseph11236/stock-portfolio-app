@@ -76,6 +76,9 @@ export const updatePortfolioThunk = purchasedStock => {
   return async dispatch => { 
     try {
       const { data } = await axios.post('/api/portfolio', purchasedStock);
+      const symbols = data.symbols;
+      const stocks = data.stocks;
+      dispatch(getPortfolioStockData(symbols,stocks));
     } catch (error) {
       console.error(error);
     }

@@ -23,25 +23,52 @@ router.get('/:userId', async (req, res, next) => {
 });
 
 router.post('/', async(req, res, next) => { 
-  const [stock, wasCreated] = await Stock.findOrCreate({
-    where: { 
-      symbol: req.body.symbol,
-      name: req.body.name
-    }
-  })
-
-  if(!wasCreated){
-    const updateStockInPortfolio = await Portfolio.findOne({
+  try {
+    const [stock, wasCreated] = await Stock.findOrCreate({
       where: { 
-        stockId: stock.id,
+        symbol: req.body.symbol,
+        name: req.body.name
+      }
+    })
+  
+    if(!wasCreated){
+      const updateStockInPortfolio = await Portfolio.findOne({
+        where: { 
+          stockId: stock.id,
+          userId: req.user.id
+        }
+      })
+      const total = updateStockInPortfolio.quantity + req.body.quantity;
+      await updateStockInPortfolio.update({ quantity: total });  
+    }
+    else { 
+      const foundStock = await Stock.findByPk(stock.id);
+      await Portfolio.create({
+        stockId: foundStock.id,
+        userId: req.user.id,
+        quantity: req.body.quantity
+      });
+    }
+    
+    // Get updated portfolio
+    const updatedPortfolio = await Portfolio.findAll({
+      where: { 
         userId: req.user.id
       }
     })
-    const total = updateStockInPortfolio.quantity + req.body.quantity;
-    const incrementStock = await updateStockInPortfolio.update({ quantity: total });  
+    
+    // Get symbols and stocks
+    if(updatedPortfolio.length) {
+      const portfolioStocks = await Portfolio.getPortfolioStocks(updatedPortfolio);
+      res.send(portfolioStocks);  
+    }
+    else { 
+      res.status(404).send('No portfolio found');      
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
   }
-
-  
 });
 
 
