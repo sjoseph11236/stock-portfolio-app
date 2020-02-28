@@ -5,6 +5,7 @@ import axios from 'axios';
  */
 const GOT_PORTFOLIO = 'GOT_PORTFOLIO';
 const UPDATE_TOTAL = 'UPDATE_TOTAL';
+
 /**
  * INITIAL STATE
  */
@@ -71,6 +72,15 @@ export const getPortfolioStockData = (symbols, stocks) => {
   }
 };
 
+export const updatePortfolioThunk = purchasedStock => { 
+  return async dispatch => { 
+    try {
+      const { data } = await axios.post('/api/portfolio', purchasedStock);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
 
 const portfolio = (state = initialState, action) => {
   switch(action.type) { 

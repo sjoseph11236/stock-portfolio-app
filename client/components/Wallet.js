@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPurchaseTickerDataThunk, gotError, clearError } from '../store/reducers/transaction';
 import { purchaseThunk } from '../store/reducers/user';
+import { updatePortfolioThunk } from '../store/reducers/portfolio';
 
 class  Wallet extends Component {
   constructor() {
@@ -23,7 +24,11 @@ class  Wallet extends Component {
 
   async handleSubmit(evt) {
     evt.preventDefault();
-    const { getPurchaseTickerDataThunk, gotError, clearError, userId, purchaseThunk } = this.props;
+    const { getPurchaseTickerDataThunk, 
+          gotError, 
+          clearError, 
+          purchaseThunk, 
+          updatePortfolioThunk } = this.props;
     const { ticker, quantity } = this.state;
 
     // Check if quantity is whole number
@@ -62,17 +67,22 @@ class  Wallet extends Component {
     else { 
       
       const transaction = { 
-        userId,
         type: 'BUY',
         stock: ticker,
-        name: this.props.purchase.name,
         price: Math.round(this.props.purchase.latestPrice) * 100,
         quantity: Number(quantity),
         totalValue:(Math.round(this.props.purchase.latestPrice) * 100 ) * Number(quantity)
       }
+      const purchasedStock = { 
+        symbol: ticker.toUpperCase(),
+        name: this.props.purchase.name,
+        quantity: Number(quantity)
+      }
       
       // update user cash
-      purchaseThunk(transaction.totalValue);
+      await purchaseThunk(transaction.totalValue);
+      // update user portfolio 
+      await updatePortfolioThunk(purchasedStock);
 
       this.setState({
         ticker: '',
@@ -148,7 +158,6 @@ class  Wallet extends Component {
 const mapStateToProps = state => {
   return {
     cash: state.user.cash,
-    userId: state.user.id,
     purchase: state.transaction.purchase,
     error: state.transaction.error
   }
@@ -157,6 +166,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getPurchaseTickerDataThunk: symbols => dispatch(getPurchaseTickerDataThunk(symbols)),
+    updatePortfolioThunk: purchasedStock => dispatch(updatePortfolioThunk(purchasedStock)),
     gotError: message => dispatch(gotError(message)),
     purchaseThunk: amount => dispatch(purchaseThunk(amount)),
     clearError: () => dispatch(clearError())

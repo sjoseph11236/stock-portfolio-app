@@ -1,15 +1,15 @@
 [
   {
     "symbol": "AAPL",
-    "name": "Apple"
+    "name": "Apple, Inc."
   },
   {
     "symbol": "MSFT",
-    "name": "Microsoft"
+    "name": "Microsoft Corp."
 
   },
   {
     "symbol": "AMZN",
-    "name": "Amazon"
+    "name": "Amazon.com, Inc."
   }
 ]
