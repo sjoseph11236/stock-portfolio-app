@@ -3,12 +3,13 @@ import store from './store';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import App from './app';
-import { HashRouter as Router }  from 'react-router-dom';
+import { Router }  from 'react-router-dom';
+import history from './history';
 
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router >
+    <Router history={history} >
       <App /> 
     </Router>
   </Provider>,
