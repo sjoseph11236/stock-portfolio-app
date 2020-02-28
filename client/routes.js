@@ -17,8 +17,10 @@ class Routes extends Component {
   async componentDidMount() {
     await this.props.loadInitialData();
     await this.props.getChartThunk();  
-    await this.props.getTransactionsThunk(this.props.userId);
-    await this.props.getPortfolioThunk(this.props.userId);
+    if(this.props.userId){
+      await this.props.getPortfolioThunk(this.props.userId);
+      await this.props.getTransactionsThunk(this.props.userId);
+    }
   }
 
   render() {

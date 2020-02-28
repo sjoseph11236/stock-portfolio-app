@@ -32,14 +32,17 @@ router.post('/', async(req, res, next) => {
     })
   
     if(!wasCreated){
-      const updateStockInPortfolio = await Portfolio.findOne({
+      const [updateStockInPortfolio, wasCreated] = await Portfolio.findOrCreate({
         where: { 
           stockId: stock.id,
           userId: req.user.id
         }
       })
-      const total = updateStockInPortfolio.quantity + req.body.quantity;
-      await updateStockInPortfolio.update({ quantity: total });  
+
+      if(!wasCreated) {
+        const total = updateStockInPortfolio.quantity + req.body.quantity;
+        await updateStockInPortfolio.update({ quantity: total });  
+      }
     }
     else { 
       const foundStock = await Stock.findByPk(stock.id);

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { auth } from '../../store';
+import { getTransactionsThunk } from '../../store/reducers/transaction';
+import { getPortfolioThunk } from '../../store/reducers/portfolio';
 
 class SignIn extends Component {
   constructor() {
@@ -14,11 +16,15 @@ class SignIn extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(evt) {
+  async handleSubmit(evt) {
     evt.preventDefault()
     const email = this.state.email;
     const password = this.state.password;
-    this.props.auth('', email, password, 'login');
+    await this.props.auth('', email, password, 'login');
+    if(this.props.userId){
+      await this.props.getPortfolioThunk(this.props.userId);
+      await this.props.getTransactionsThunk(this.props.userId);
+    }
   }
 
   handleChange(event) {
@@ -73,14 +79,17 @@ class SignIn extends Component {
 
 const mapStateToProps = state => {
   return {
-    error: state.user.error
+    error: state.user.error,
+    userId: state.user.id
   }
 };
 
 
 const mapDispatchToProps = dispatch => {
   return {
-    auth: (name, email, password, method) => dispatch(auth(name, email, password, method))
+    auth: (name, email, password, method) => dispatch(auth(name, email, password, method)),
+    getTransactionsThunk: userId => dispatch(getTransactionsThunk(userId)),
+    getPortfolioThunk: userId => dispatch(getPortfolioThunk(userId))
   }
 };
 

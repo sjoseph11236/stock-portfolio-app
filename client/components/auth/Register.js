@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { auth } from '../../store';
 
+
 class Register extends Component {
   constructor() {
     super()
@@ -15,12 +16,12 @@ class Register extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(evt) {
+  async handleSubmit(evt) {
     evt.preventDefault();
     const name = this.state.name;
     const email = this.state.email;
     const password = this.state.password;
-    this.props.auth(name, email, password, 'signup');
+    await this.props.auth(name, email, password, 'signup');
   }
 
   handleChange(event) {
@@ -83,13 +84,13 @@ class Register extends Component {
 
 const mapStateToProps = state => {
   return {
-    error: state.user.error
+    error: state.user.error,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    auth: (name, email, password,method) => dispatch(auth(name, email, password, method))
+    auth: (name, email, password,method) => dispatch(auth(name, email, password, method)),
   }
 };
 

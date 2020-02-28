@@ -5,6 +5,7 @@ import axios from 'axios';
  */
 const GOT_TRANSACTIONS = 'GOT_TRANSACTIONS';
 const GOT_PURCHASE = 'GOT_PURCHASE';
+const CLEAR_TRANSACTIONS = 'CLEAR_TRANSACTIONS';
 const GOT_ERROR = 'GOT_ERROR';
 const CLEAR_ERROR = 'CLEAR_ERROR';
 /**
@@ -45,6 +46,12 @@ export const gotError = message => {
 export const clearError = () => { 
   return { 
     type: CLEAR_ERROR
+  }
+}
+
+export const clearTransactions = () => { 
+  return { 
+    type: CLEAR_TRANSACTIONS
   }
 }
 /**
@@ -98,6 +105,8 @@ const transaction = (state = initialState, action) => {
       return { ...state, error: action.message };
     case CLEAR_ERROR:
       return { ...state, error: '' };
+    case CLEAR_TRANSACTIONS:
+      return { ...state, transactions: [] };
     default: 
       return state;
   }

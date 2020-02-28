@@ -4,6 +4,7 @@ import axios from 'axios';
  * ACTION TYPES
  */
 const GOT_PORTFOLIO = 'GOT_PORTFOLIO';
+const CLEAR_PORTFOLIO = 'CLEAR_PORTFOLIO';
 const UPDATE_TOTAL = 'UPDATE_TOTAL';
 
 /**
@@ -33,6 +34,11 @@ const updatePortfolioTotal = portfolioTotal => {
   }
 }
 
+export const clearPortfolio = () => { 
+  return { 
+    type: CLEAR_PORTFOLIO
+  }
+}
 
 /**
  * THUNK CREATORS
@@ -89,6 +95,8 @@ const portfolio = (state = initialState, action) => {
   switch(action.type) { 
     case GOT_PORTFOLIO: 
       return { ...state, stocks: action.stocks };
+    case CLEAR_PORTFOLIO: 
+      return { ...state, stocks: [], portfolioTotal: 0 };
     case UPDATE_TOTAL: 
       return { ...state, portfolioTotal: action.portfolioTotal };
     default: 

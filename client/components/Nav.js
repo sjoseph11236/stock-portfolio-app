@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../store';
+import { clearTransactions } from '../store/reducers/transaction';
+import { clearPortfolio } from '../store/reducers/portfolio';
 
 const Nav = ({ handleClick , isLoggedIn }) => {
   return ( 
@@ -66,6 +68,8 @@ const mapDispatchToProps = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+      dispatch(clearTransactions())
+      dispatch(clearPortfolio())
     }
   }
 }
