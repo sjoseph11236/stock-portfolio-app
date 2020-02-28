@@ -7,6 +7,8 @@ const Receipts = ({ transaction }) => {
       <td>{transaction.stock.symbol} - </td>
       <td>{transaction.quantity}</td>
       <td>@ ${transaction.price / 100 }</td>
+      <td>${transaction.totalValue / 100 }</td>
+      <td>{transaction.createdAt.slice(0,10)}</td>
     </tr>
   );
 }

@@ -20,10 +20,11 @@ const Transactions = ({ transactions }) => {
                     <th>Ticker</th>
                     <th>Shares</th>
                     <th>Price</th>
+                    <th>Total Value</th>
+                    <th>Date</th>
                   </tr>
                 </thead>
                 <tbody>
-
                   {transactions.map( transaction => { 
                     return <Receipts key={transaction.id} transaction={transaction} />
                   })}

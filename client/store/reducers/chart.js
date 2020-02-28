@@ -33,7 +33,6 @@ export const getChartThunk = (symbols = 'aapl,amzn,fb,msft') => {
     try {
       const { data } = await axios.get(`/api/iex/stock/${symbols}`);
       const colorizedData = colorize(data);
-      console.log("TCL: getChartThunk -> colorizedData", colorizedData)
       dispatch(gotChart(colorizedData));
     } catch (error) {
       console.error(error);
