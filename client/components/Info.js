@@ -2,7 +2,7 @@ import React from 'react';
 
 const Info = ({ stock }) => {
   return ( 
-    <tr>
+    <tr className={stock.colorize}>
       <td>{stock.symbol} - </td>
       <td>{stock.name}</td>
       <td>{stock.latestPrice}</td>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import colorize from '../../../scripts/helper';
 /**
  * ACTION TYPES
  */
@@ -32,7 +32,9 @@ export const getChartThunk = (symbols = 'aapl,amzn,fb,msft') => {
   return async dispatch => {
     try {
       const { data } = await axios.get(`/api/iex/stock/${symbols}`);
-      dispatch(gotChart(data));
+      const colorizedData = colorize(data);
+      console.log("TCL: getChartThunk -> colorizedData", colorizedData)
+      dispatch(gotChart(colorizedData));
     } catch (error) {
       console.error(error);
     }

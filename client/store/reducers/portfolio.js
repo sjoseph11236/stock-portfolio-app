@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import colorize from '../../../scripts/helper';
+import { updateData } from '../../../scripts/helper';
 /**
  * ACTION TYPES
  */
@@ -62,16 +63,10 @@ export const getPortfolioStockData = (symbols, stocks) => {
   return async dispatch => { 
     try {
       const { data } = await axios.get(`/api/iex/stock/${symbols}`);   
-      let portfolioTotal = 0;
-      data.map((stock, idx ) => {
-        if(stocks[idx].symbol === stock.symbol){
-          stock.quantity = stocks[idx].quantity;
-          stock.latestPrice = Math.round(stock.latestPrice);
-          portfolioTotal += ((stock.latestPrice * 100) * stocks[idx].quantity);
-        }
-      });
-      dispatch(gotPortfolio(data));   
-      dispatch(updatePortfolioTotal(portfolioTotal));
+      const updatedData = updateData(data, stocks);
+      const colorizedData = colorize(updatedData.data);
+      dispatch(gotPortfolio(colorizedData));   
+      dispatch(updatePortfolioTotal(updatedData.portfolioTotal));
     } catch (error) {
       console.error(error);
     }
