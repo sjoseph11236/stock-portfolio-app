@@ -13,10 +13,6 @@
     "seed": "node ./bin/seed.js",
     "test": "jest --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sjoseph11236/my-boiler-plate.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
