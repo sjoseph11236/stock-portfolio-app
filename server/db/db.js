@@ -4,7 +4,8 @@ const chalk = require('chalk');
 console.log(chalk.yellow('Opening database connection'));
 
 const database = 'stock_portfolio';
-const db = new Sequelize(`postgres://localhost:5432/${database}`, {
+const databaseURL = process.env.DATABASE_URL ||`postgres://localhost:5432/${database}`;
+const db = new Sequelize(databaseURL, {
   logging: false
 });
 
