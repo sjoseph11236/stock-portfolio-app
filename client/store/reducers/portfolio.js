@@ -1,6 +1,6 @@
 import axios from 'axios';
-import colorize from '../../../scripts/helper';
-import { updateData } from '../../../scripts/helper';
+import colorize from '../../../script/helper';
+import { updateData } from '../../../script/helper';
 /**
  * ACTION TYPES
  */
