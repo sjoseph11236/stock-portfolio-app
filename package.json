@@ -4,22 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build-client": "webpack -p",
+    "deploy": "script/deploy",
     "start": "npm run build-watch & npm run start-server",
     "server": "nodemon main",
     "start-server": "nodemon --watch server main.js -e html,js,css",
     "build-watch": "webpack -w",
-    "start-dev": "webpack -w & nodemon server.js",
+    "start-dev": "webpack -w & nodemon --watch  server.js",
     "test:dev": "mocha test/spec.js --watch",
     "seed": "node ./bin/seed.js",
     "test": "jest --watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sayeed Joseph",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sjoseph11236/my-boiler-plate/issues"
-  },
-  "homepage": "https://github.com/sjoseph11236/my-boiler-plate#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
