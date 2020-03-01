@@ -1,5 +1,5 @@
 const db = require('./db');
-const User = require('./models/user');
+const User = require('./models/User');
 const Stock = require('./models/stock');
 const Portfolio = require('./models/portfolio');
 const Transaction = require('./models/transaction');
