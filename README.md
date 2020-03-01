@@ -5,7 +5,7 @@
 
   ![homepage](/public/home.png)
 
-## Install: 
+### Install: 
   From the terminal, run:
 
   ``` 
@@ -14,8 +14,15 @@
   createdb stock_portfolio
   npm install
   npm run start:dev
+  
   ```
 
+  In the project directory, you can run:
+  
+  ### `npm run start:dev`
 
-### SOURCES:
-https://iexcloud.io/docs/api/
+  Runs the app in the development mode.
+  Open http://localhost:3000 to view it in the browser.
+
+### SOURCES:  
+  https://iexcloud.io/docs/api/
