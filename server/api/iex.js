@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Stock } =require('../db');
 const axios = require('axios');
-const API_TOKEN = require('../../secret');
+const API_TOKEN = process.env.API_TOKEN || require('../../secret');
 
 
 router.get('/stock/:symbols', async (req, res, next) => { 
