@@ -1,10 +1,17 @@
 # STOCK PORTFOLIO APP:
+  A simple web app to simulate buying stocks:
 
-- to-do:
-    - fix sequelize error for short password
-  - Display transaction history in order and display dates. 
-    -reference Sequelize order.
-  -deploy 
+  ![homepage](/public/home.png)
+
+## Install: 
+  Run the following commands:
+
+  ```
+      createdb stock_portfolio
+      npm install
+      npm run start:dev
+  ```
+
 
 ### SOURCES:
 https://iexcloud.io/docs/api/
