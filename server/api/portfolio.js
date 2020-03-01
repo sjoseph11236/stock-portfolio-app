@@ -29,7 +29,7 @@ router.post('/', async(req, res, next) => {
         symbol: req.body.symbol,
         name: req.body.name
       }
-    })
+    });
   
     if(!wasCreated){
       const [updateStockInPortfolio, wasCreated] = await Portfolio.findOrCreate({
@@ -58,7 +58,7 @@ router.post('/', async(req, res, next) => {
       where: { 
         userId: req.user.id
       }
-    })
+    });
     
     // Get symbols and stocks
     if(updatedPortfolio.length) {

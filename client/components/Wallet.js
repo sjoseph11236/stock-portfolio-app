@@ -47,22 +47,22 @@ class  Wallet extends Component {
     // Get ticker and latest Price
     await getPurchaseTickerDataThunk(ticker);
     if(this.props.error){
-      this.setState({inputColors:{ticker:'is-danger'}})
+      this.setState({inputColors:{ticker:'is-danger'}});
       setTimeout(() => { 
-        clearError()
-        this.setState({inputColors:{ ticker:''}})
+        clearError();
+        this.setState({inputColors:{ ticker:''}});
       }, 3000);
       return;
     }
 
     // Check if user can afford. 
-    const canAfford = this.checkIfCanAfford()
+    const canAfford = this.checkIfCanAfford();
     if(!canAfford)  {
       gotError("Can't afford, try a different amount.");
-      this.setState({inputColors:{quantity:'is-danger'}})
+      this.setState({inputColors:{quantity:'is-danger'}});
       setTimeout(() => { 
-        clearError()
-        this.setState({inputColors:{ quantity:''}})
+        clearError();
+        this.setState({inputColors:{ quantity:''}});
       }, 3000);
     }
     else { 
@@ -90,7 +90,7 @@ class  Wallet extends Component {
       this.setState({
         ticker: '',
         quantity: '',
-      })
+      });
     }
   };
 

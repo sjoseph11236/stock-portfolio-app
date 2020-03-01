@@ -8,8 +8,8 @@ router.get('/:userId', async (req, res, next ) => {
         userId: req.params.userId
       }, 
       include: [{ model: Stock }]
-    })
-    
+    });
+
     if(transactions.length) {
       res.send(transactions);
     }
@@ -45,7 +45,7 @@ router.post('/', async(req, res, next) => {
         userId: req.user.id
       }, 
       include: [{ model: Stock }]
-    })
+    });
     
     if(transactions.length) {
       res.send(transactions);
