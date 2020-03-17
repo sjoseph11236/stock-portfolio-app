@@ -19,12 +19,13 @@ class Routes extends Component {
     await this.props.getChartThunk();  
     if(this.props.userId){
       await this.props.getPortfolioThunk(this.props.userId);
-      setInterval( async ()=> { 
-        await this.props.dynamicUpdatePortfolioThunk();
-      }, 5000);
+      // setInterval( async ()=> { 
+      //   await this.props.dynamicUpdatePortfolioThunk();
+      // }, 5000);
       await this.props.getTransactionsThunk(this.props.userId);
     }
   }
+
 
   render() {
     const { isLoggedIn } = this.props
