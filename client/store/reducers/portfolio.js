@@ -101,7 +101,6 @@ export const dynamicUpdatePortfolioThunk = () => {
   return async (dispatch, getState) => { 
     try {
       const { symbols, stocks } = getState().portfolio.portfolio;
-      console.log('here', symbols);
       dispatch(getPortfolioStockData(symbols, stocks));
     } catch (error) {
       console.error(error);      
