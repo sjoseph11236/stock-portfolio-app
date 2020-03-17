@@ -10,7 +10,7 @@ import Transactions from './components/Transactions';
 import Chart from './components/Chart';
 import { getChartThunk }from './store/reducers/chart';
 import { getTransactionsThunk } from './store/reducers/transaction';
-import { getPortfolioThunk } from './store/reducers/portfolio';
+import { getPortfolioThunk, dynamicUpdatePortfolioThunk } from './store/reducers/portfolio';
 
 class Routes extends Component {
 
@@ -19,6 +19,9 @@ class Routes extends Component {
     await this.props.getChartThunk();  
     if(this.props.userId){
       await this.props.getPortfolioThunk(this.props.userId);
+      setInterval( async ()=> { 
+        await this.props.dynamicUpdatePortfolioThunk();
+      }, 5000);
       await this.props.getTransactionsThunk(this.props.userId);
     }
   }
@@ -61,6 +64,7 @@ const mapDispatchToProps = dispatch => {
     loadInitialData() {
       dispatch(me())
     }, 
+    dynamicUpdatePortfolioThunk: () => dispatch(dynamicUpdatePortfolioThunk()),
     getChartThunk: symbols => dispatch(getChartThunk(symbols)),
     getTransactionsThunk: userId => dispatch(getTransactionsThunk(userId)),
     getPortfolioThunk: userId => dispatch(getPortfolioThunk(userId))
