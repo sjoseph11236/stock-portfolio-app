@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Table from './Table';
 import { connect } from 'react-redux';
+import { dynamicUpdatePortfolioThunk } from '../store/reducers/portfolio';
 
-const Portfolio = ({ stocks, portfolioTotal }) => {
+const Portfolio = ({ stocks, portfolioTotal, dynamicUpdatePortfolioThunk }) => {
+
+  useEffect(() => {
+    const interval = setInterval(()=> { 
+      dynamicUpdatePortfolioThunk();
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   return ( 
     <div className="tile is-parent">
       <article className="tile is-child notification">
@@ -43,4 +52,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(Portfolio);
+const mapDispatchToProps = dispatch => { 
+  return {
+    dynamicUpdatePortfolioThunk: () => dispatch(dynamicUpdatePortfolioThunk()),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);

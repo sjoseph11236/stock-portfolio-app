@@ -5,6 +5,7 @@ import { updateData } from '../../../script/helper';
  * ACTION TYPES
  */
 const GOT_PORTFOLIO = 'GOT_PORTFOLIO';
+const UPDATE_PORTFOLIO = 'UPDATE_PORTFOLIO';
 const CLEAR_PORTFOLIO = 'CLEAR_PORTFOLIO';
 const UPDATE_TOTAL = 'UPDATE_TOTAL';
 
@@ -14,6 +15,7 @@ const UPDATE_TOTAL = 'UPDATE_TOTAL';
 
 const initialState  = { 
   portfolioTotal: 0,
+  portfolio: {},
   stocks: [],
 };
 
@@ -27,6 +29,13 @@ const gotPortfolio = stocks => {
     stocks
   }
 };
+
+const updatePortfolio = portfolio => {
+  return {
+    type: UPDATE_PORTFOLIO,
+    portfolio
+  }
+}
 
 const updatePortfolioTotal = portfolioTotal => { 
   return { 
@@ -51,6 +60,7 @@ export const getPortfolioThunk = userId => {
       const { data } = await axios.get(`/api/portfolio/${userId}`);
       const symbols = data.symbols;
       const stocks = data.stocks;
+      dispatch(updatePortfolio({ symbols, stocks }))
       dispatch(getPortfolioStockData(symbols,stocks));
     } catch (error) {
       console.error(error);
@@ -79,9 +89,21 @@ export const updatePortfolioThunk = purchasedStock => {
       const { data } = await axios.post('/api/portfolio', purchasedStock);
       const symbols = data.symbols;
       const stocks = data.stocks;
+      dispatch(updatePortfolio({ symbols, stocks }))
       dispatch(getPortfolioStockData(symbols,stocks));
     } catch (error) {
       console.error(error);
+    }
+  }
+}
+
+export const dynamicUpdatePortfolioThunk = () => {
+  return (dispatch, getState) => { 
+    try {
+      const { symbols, stocks } = getState().portfolio.portfolio;
+      dispatch(getPortfolioStockData(symbols, stocks));
+    } catch (error) {
+      console.error(error);      
     }
   }
 }
@@ -90,6 +112,8 @@ const portfolio = (state = initialState, action) => {
   switch(action.type) { 
     case GOT_PORTFOLIO: 
       return { ...state, stocks: action.stocks };
+    case UPDATE_PORTFOLIO: 
+      return { ...state, portfolio: action.portfolio };
     case CLEAR_PORTFOLIO: 
       return { ...state, stocks: [], portfolioTotal: 0 };
     case UPDATE_TOTAL: 
