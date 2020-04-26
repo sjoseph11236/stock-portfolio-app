@@ -1,4 +1,4 @@
-# STOCK PORTFOLIO APP:
+# Stock Portfolio App:
   A web-based stock portfolio app to simulate buying stocks:
   
   [Visit here](https://tttp-stock-app.herokuapp.com/)
