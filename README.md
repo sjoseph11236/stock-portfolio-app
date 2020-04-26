@@ -5,8 +5,8 @@
 
   ![homepage](/public/home.png)
 
-### Install: 
-  From the terminal, run:
+# Local Setup: 
+  From the terminal run:
 
   ``` 
   git clone https://github.com/sjoseph11236/stock-portfolio-app
@@ -17,12 +17,9 @@
   
   ```
 
-  In the project directory, you can run:
-  
-  ### `npm run start:dev`
-
+ 
   Runs the app in the development mode.
   Open http://localhost:3000 to view it in the browser.
 
-### SOURCES:  
+# SOURCES:  
   https://iexcloud.io/docs/api/
