@@ -14,7 +14,6 @@
   createdb stock_portfolio
   npm install
   npm run start:dev
-  
   ```
 
  
