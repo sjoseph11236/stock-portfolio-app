@@ -32,7 +32,7 @@ Visit the site and try it out for yourself to see of these features in action: [
 
 # Take Aways: 
   - Integrated IEX API for stock data to give minute-by-minute price and percent change updates for any stocks showing on screen.
-  - Integrated user authentication using Node and PostgreSQL and secured user data by hashing password entries.
+  - Integrated user authentication using Node and Postgres and secured user data by hashing password entries.
 
 # Resources:
 React, Redux, Express, Sequelize, Postgres, Heroku, IEX Cloud API.
